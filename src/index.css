@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* PrimeTrade Dark Premium Theme */
+    --background: 222 47% 4%;
+    --background-card: 222 40% 7%;
+    --background-elevated: 222 35% 10%;
+    --foreground: 210 20% 92%;
+    --card: 222 40% 7%;
+    --card-foreground: 210 20% 92%;
+    --popover: 222 40% 9%;
+    --popover-foreground: 210 20% 92%;
+
+    /* Accent: Cyan-teal for bullish / primary */
+    --primary: 180 90% 50%;
+    --primary-foreground: 222 47% 4%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 20% 75%;
+
+    --muted: 222 25% 12%;
+    --muted-foreground: 210 15% 50%;
+
+    --accent: 180 90% 50%;
+    --accent-foreground: 222 47% 4%;
+
+    /* Signal colors */
+    --bullish: 160 84% 48%;
+    --bearish: 350 85% 58%;
+    --alert: 38 95% 55%;
+    --wait: 210 15% 55%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 222 30% 14%;
+    --input: 222 30% 14%;
+    --ring: 180 90% 50%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 90% 50%), hsl(200 90% 55%));
+    --gradient-bullish: linear-gradient(135deg, hsl(160 84% 48%), hsl(160 70% 40%));
+    --gradient-bearish: linear-gradient(135deg, hsl(350 85% 58%), hsl(350 70% 45%));
+
+    /* Shadows */
+    --shadow-elegant: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
+    --shadow-glow: 0 0 20px rgba(0, 230, 230, 0.15), 0 0 40px rgba(0,230,230,0.05);
+    --shadow-glow-bullish: 0 0 20px rgba(52, 211, 153, 0.2);
+    --shadow-glow-bearish: 0 0 20px rgba(248, 113, 113, 0.2);
+
+    /* Chart colors */
+    --chart-1: 180 90% 50%;
+    --chart-2: 160 84% 48%;
+    --chart-3: 350 85% 58%;
+    --chart-4: 38 95% 55%;
+    --chart-5: 270 70% 65%;
+
+    /* Sidebar */
+    --sidebar-background: 222 40% 6%;
+    --sidebar-foreground: 210 20% 75%;
+    --sidebar-primary: 180 90% 50%;
+    --sidebar-primary-foreground: 222 47% 4%;
+    --sidebar-accent: 222 30% 12%;
+    --sidebar-accent-foreground: 210 20% 80%;
+    --sidebar-border: 222 30% 12%;
+    --sidebar-ring: 180 90% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: 'cv11', 'ss01';
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-mono-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-bullish { color: hsl(var(--bullish)); }
+  .text-bearish { color: hsl(var(--bearish)); }
+  .text-alert { color: hsl(var(--alert)); }
+  .bg-bullish { background-color: hsl(var(--bullish)); }
+  .bg-bearish { background-color: hsl(var(--bearish)); }
+  .bg-alert { background-color: hsl(var(--alert)); }
+  .border-bullish { border-color: hsl(var(--bullish)); }
+  .border-bearish { border-color: hsl(var(--bearish)); }
+
+  .bg-card-elevated { background-color: hsl(var(--background-elevated)); }
+  .bg-card-base { background-color: hsl(var(--background-card)); }
+
+  .glass {
+    background: rgba(10, 15, 30, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-bullish {
+    box-shadow: var(--shadow-glow-bullish);
+  }
+
+  .glow-bearish {
+    box-shadow: var(--shadow-glow-bearish);
+  }
+
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .ticker-scroll {
+    animation: ticker-move 30s linear infinite;
+  }
+
+  @keyframes ticker-move {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes signal-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(0,230,230,0.2); }
+    50% { box-shadow: 0 0 25px rgba(0,230,230,0.5); }
+  }
+
+  .animate-signal-glow {
+    animation: signal-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+  }
+
+  .animate-live-pulse {
+    animation: live-pulse 1.5s ease-in-out infinite;
+  }
+
+  /* Chart candle colors */
+  .candle-bull { fill: hsl(var(--bullish)); stroke: hsl(var(--bullish)); }
+  .candle-bear { fill: hsl(var(--bearish)); stroke: hsl(var(--bearish)); }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+/* Mobile app-like behavior — disable system gestures/selections */
+button, a, nav, [role="button"] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}

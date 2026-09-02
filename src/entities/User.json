@@ -1,0 +1,34 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": ["admin", "user"],
+      "default": "user"
+    },
+    "telegram": {
+      "type": "string",
+      "description": "Telegram username or phone number for signal notifications"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "WhatsApp number (with country code) for signal notifications"
+    },
+    "notifications_setup": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user has completed notification setup"
+    },
+    "subscription_status": {
+      "type": "string",
+      "enum": ["active", "inactive", "cancelled", "past_due"],
+      "default": "inactive",
+      "description": "Current subscription status — gates signal access"
+    },
+    "subscription_plan": {
+      "type": "string",
+      "description": "Active subscription plan name"
+    }
+  }
+}

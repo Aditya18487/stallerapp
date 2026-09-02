@@ -1,0 +1,118 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "plan_id": {
+      "type": "string",
+      "description": "Plan identifier (3_months, 6_months, 12_months)"
+    },
+    "plan_name": {
+      "type": "string",
+      "description": "Display name of the plan"
+    },
+    "monthly_amount": {
+      "type": "number",
+      "description": "Monthly debit order amount in ZAR"
+    },
+    "term_months": {
+      "type": "number",
+      "description": "Commitment term in months"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "cancelled",
+        "past_due",
+        "pending"
+      ],
+      "default": "pending",
+      "description": "Current subscription status"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Subscription start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Subscription end date after term"
+    },
+    "bank_account_holder": {
+      "type": "string",
+      "description": "Name of the bank account holder"
+    },
+    "bank_name": {
+      "type": "string",
+      "description": "Bank name (e.g. FNB, Standard Bank, ABSA)"
+    },
+    "bank_account_number": {
+      "type": "string",
+      "description": "Bank account number for debit order"
+    },
+    "bank_branch_code": {
+      "type": "string",
+      "description": "Bank branch code"
+    },
+    "bank_account_type": {
+      "type": "string",
+      "enum": [
+        "cheque",
+        "savings",
+        "current"
+      ],
+      "default": "cheque",
+      "description": "Type of bank account"
+    },
+    "debit_order_day": {
+      "type": "number",
+      "default": 1,
+      "description": "Day of month the debit order runs (1-31)"
+    }
+  },
+  "required": [
+    "plan_id",
+    "plan_name",
+    "monthly_amount",
+    "term_months",
+    "bank_account_holder",
+    "bank_name",
+    "bank_account_number",
+    "bank_branch_code"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "Telegram Signal Push",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "*/5 * * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "description": "Checks for HIGH-ALERT trade signals every 5 minutes and pushes them to Telegram",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "telegram_signal_push",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "push_signals": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "sendTelegramSignals"
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Push high-alert signals to Telegram",
+            "description": "Generates signals and sends HIGH-ALERT ones via Telegram Bot API"
+          }
+        }
+      }
+    ]
+  }
+}
